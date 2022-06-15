@@ -29,7 +29,7 @@ is_x64 = platform_machine == "x86_64"
 if is_x64:
     requirements.append("tensorflow>=2.4.0")
 elif is_arm:
-    requirements.append("tensorflow-aarch64>=2.4.0")
+    requirements.append("tensorflow-aarch64>=2.9.1")
 
 
 def read_file(filename: str) -> str:
