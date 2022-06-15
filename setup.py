@@ -4,6 +4,7 @@
 # pylint: skip-file
 
 from setuptools import find_packages, setup
+import platform
 
 ##### Dependencies of GPflow
 
@@ -17,10 +18,18 @@ requirements = [
     "setuptools>=41.0.0",  # to satisfy dependency constraints
     "tabulate",
     "tensorflow-probability>=0.12.0",
-    "tensorflow>=2.4.0",
     # NOTE: once we require tensorflow-probability>=0.12, we can remove our custom deepcopy handling
     "typing_extensions",
 ]
+
+platform_machine = platform.machine()
+is_arm = platform_machine == "aarch64"
+is_x64 = platform_machine == "x86_64"
+
+if is_x64:
+    requirements.append("tensorflow>=2.4.0")
+elif is_arm:
+    requirements.append("tensorflow-aarch64>=2.4.0")
 
 
 def read_file(filename: str) -> str:
